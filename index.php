@@ -108,7 +108,6 @@ include('template/header.php');
 						<a href="detail.php" class="img-link"><img src="assets/landing/images/img_2_horizontal.jpg" alt="Image" class="img-fluid"></a>
 						<div class="excerpt">
 							
-
 							<h2><a href="detail.php">Startup vs corporate: What job suits you best?</a></h2>
 							<div class="post-meta align-items-center text-left clearfix">
 								<figure class="author-figure mb-0 me-3 float-start"><img src="assets/landing/images/person_4.jpg" alt="Image" class="img-fluid"></figure>
