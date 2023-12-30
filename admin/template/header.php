@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if(!isset($_SESSION['username']) and (!isset($_SESSION['id_admin']))){
+  header('location: ../login.php?pesan=notlogin');
+}
+?>
 <!DOCTYPE html>
 
 <html
@@ -192,7 +197,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" href="logout.php">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

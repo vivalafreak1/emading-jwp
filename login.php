@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html
@@ -125,16 +124,31 @@
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to e-Mading JeWePe 👋</h4>
-              <p class="mb-4"></p>
-
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <p class="mb-4">
+                <?php
+                  if(isset($_GET['pesan'])){
+                    if($_GET['pesan'] == 'gagal') {
+                      echo '<i class="text-danger">Login Gagal! Username atau Password tidak sesuai!</i>';
+                    } else if ($_GET['pesan'] == 'empty') {
+                      echo '<i class="text-danger">Username dan Password tidak boleh kosong</i>';
+                    } else if ($_GET['pesan'] == 'notfound') {
+                      echo '<i class="text-danger">Username tidak tersedia!</i>';
+                    } else if ($_GET['pesan'] == 'notlogin') {
+                      echo '<i class="text-danger">Anda harus login untuk mengakses halaman admin!</i>';
+                    } else if ($_GET['pesan'] == 'logout') {
+                      echo '<i class="text-danger">Anda telah berhasil logout.</i>';
+                    }
+                  }
+                ?>
+              </p>
+              <form id="formAuthentication" class="mb-3" action="authentication.php" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
-                    name="email-username"
+                    name="username"
                     placeholder="Enter your email or username"
                     autofocus
                   />
@@ -156,7 +170,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" name="submit" type="submit">Sign in</button>
                 </div>
               </form>
 
