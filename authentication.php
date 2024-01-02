@@ -37,14 +37,14 @@ if(isset($_SESSION['username']) || isset($_SESSION['id_admin'])) {
 
             // Cek ketersediaan data username
             if($rows !=0) {
-                $getPassword = mysqli_fetch_assoc($query)['password'];
+                $getData = $query -> fetch_assoc();
 
                 // var_dump($getPassword);
                 // die;
 
-                if(password_verify($password, $getPassword)) {
+                if(password_verify($password, $getData['password'])) {
                     $_SESSION['username'] = $username;
-                    $_SESSION['id_admin']= mysqli_fetch_assoc($query)['id_admin'];
+                    $_SESSION['id_admin'] = $getData['id_admin'];
 
                     header('location: admin/index.php');
                 } else {

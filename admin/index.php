@@ -19,7 +19,7 @@ $data_article = $db->show_data();
           </div>
           <div class="col-lg-6">
             <div class="float-end">
-              <a href="tambah_data.php" class="btn btn-primary">
+              <a href="insert_data.php" class="btn btn-primary">
                 <i class="bx bx-plus"></i>
                 Tambah Data
               </a>
@@ -50,27 +50,36 @@ $data_article = $db->show_data();
               foreach ($data_article as $row) {
                 ?>
                 <tr>
-                  <th>
+                  <td class="text-center">
                     <?= $number++; ?>
-                  </th>
-                  <td>
-                    <?= $row['imageurl']; ?>
                   </td>
-                  <td>
+                  <td class="text-center">
+                    <a href="../files/<?= $row['imageurl']; ?>" target="_blank">
+                      <img src="../files/<?= $row['imageurl']; ?>" class="img-thumbnail rounded"
+                        style="max-width: 120px; max-height: 60px;" />
+                    </a>
+                  </td>
+                  <td class="text-center">
                     <?= $row['title']; ?>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <?= $row['ispublished']; ?>
                   </td>
-                  <td>
-                    <?= $row['updated_at']; ?>
+                  <td class="text-center">
+                    <?php
+                    if ($row['updated_at'] == '') {
+                      echo date('d M Y H:i:s', strtotime($row['created_at']));
+                    } else {
+                      echo date('d M Y H:i:s', strtotime($row['updated_at']));
+                    }
+                    ?>
                   </td>
                   <td>
                     <a href="edit.php" class="btn btn-sm btn-warning">Ubah</a>
                     <a href="delete.php" class="btn btn-sm btn-danger">Hapus</a>
                   </td>
                 </tr>
-              <?php
+                <?php
               }
             } ?>
           </tbody>
