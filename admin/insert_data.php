@@ -46,20 +46,6 @@ include('template/header.php');
                                     <input type="file" name="imageurl" class="form-control" id="uploadImage" required />
                                     <small class="text-danger">Max Size 1Mb, ext. png, jpg, jpeg, webp</small>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="preview" class="form-label">Preview Gambar</label>
-                                    <?php
-                                    if ($data['imageurl'] != "") { ?>
-                                        <a href="../files/<?= $data['imageurl']; ?>" target="_blank">
-                                            <img src="../files/<?= $data['imageurl']; ?>" class="img-thumbnail-rounded"
-                                                style="max-width: 120px; max-height: 60px;" />
-                                        </a>
-                                        <?php
-                                    } else {
-                                        echo '<i class="text-danger">File not Set!</i>';
-                                    }
-                                    ?>
-                                </div>
                             </div>
                         </div>
                         <hr>
