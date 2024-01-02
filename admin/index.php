@@ -75,7 +75,7 @@ $data_article = $db->show_data();
                     ?>
                   </td>
                   <td>
-                    <a href="edit.php" class="btn btn-sm btn-warning">Ubah</a>
+                    <a href="edit.php?id=<?= $row['id_article']; ?>" class="btn btn-sm btn-warning">Ubah</a>
                     <a href="delete.php" class="btn btn-sm btn-danger">Hapus</a>
                   </td>
                 </tr>

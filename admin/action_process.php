@@ -9,11 +9,6 @@ if ($action == "add") {
     // Insert Data
     // File checking if already choose
 
-    // echo "<pre>";
-    // print_r($_FILES);
-    // echo "</pre>";
-    // die;
-
     if ($_FILES["imageurl"]["name"] != '') {
         $tmp = explode('.', $_FILES['imageurl']['name']); // Memecah nama file dan extension
         $ext = end($tmp); // Mengambil extension
@@ -56,10 +51,9 @@ if ($action == "add") {
 } elseif ($action == "edit") {
     // Edit Data
 } elseif ($action == "delete") {
-    // Delte data
+    // Delete data
 } else {
     echo "<script>alert('Anda tidak mendapatkan akses untuk operasi ini!');document.location.href = 'index.php';</script>";
 }
-
 
 ?>

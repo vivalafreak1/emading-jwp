@@ -32,7 +32,30 @@ class database
         return $data;
     }
 
-    //Get data tb_article
+    //Get data tb_article landing page
+    public function show_data_landing()
+    {
+        $data = mysqli_query(
+            $this->connection,
+            "SELECT id_article, imageurl, title, content, ispublished, tba.created_at, tba.updated_at, name, tba.id_admin 
+            FROM tb_article tba JOIN tb_admin tbu on tba.id_admin = tbu.id_admin 
+            WHERE ispublished = 'publish'"
+        );
+
+        if ($data) {
+            if (mysqli_num_rows($data) > 0) {
+                while ($row = mysqli_fetch_array($data)) {
+                    $result[] = $row;
+                }
+            } else {
+                $result = '0';
+            }
+        }
+
+        return $result;
+    }
+
+    //Get data tb_article admin page
     public function show_data()
     {
         $data = mysqli_query(
@@ -70,8 +93,11 @@ class database
     public function get_by_id($id_article) {
         $query = mysqli_query(
             $this->connection,
-            "SELECT id_article, imageurl, title, content, ispublished, tba.created_at, tba.updated_at, name, tba.id_admin FROM tb_article tba JOIN tb_admin tbu on tba.id_admin = tbu.id_admin"
+            "SELECT id_article, imageurl, title, content, ispublished, tba.created_at, tba.updated_at, name, tba.id_admin 
+            FROM tb_article tba JOIN tb_admin tbu on tba.id_admin = tbu.id_admin
+            WHERE id_article ='$id_article'"
         );
+        return $query->fetch_array();
     }
 
     public function update_data($imageurl, $title, $content, $ispublished, $id_article, $id_admin)
@@ -80,7 +106,9 @@ class database
         if ($imageurl == 'not_set') {
             $query = mysqli_query(
                 $this->connection,
-                "UPDATE tb_article SET title = '$title', content = '$content', ispublished = '$ispublished' WHERE id_article = '$id_article'"
+                "UPDATE tb_article
+                SET title = '$title', content = '$content', ispublished = '$ispublished'
+                WHERE id_article = '$id_article'"
             );
             return $query;
         } else {
