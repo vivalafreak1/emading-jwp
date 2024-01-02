@@ -90,7 +90,8 @@ class database
         return $insert;
     }
 
-    public function get_by_id($id_article) {
+    public function get_by_id($id_article)
+    {
         $query = mysqli_query(
             $this->connection,
             "SELECT id_article, imageurl, title, content, ispublished, tba.created_at, tba.updated_at, name, tba.id_admin 
@@ -107,25 +108,38 @@ class database
             $query = mysqli_query(
                 $this->connection,
                 "UPDATE tb_article
-                SET title = '$title', content = '$content', ispublished = '$ispublished'
+                SET title = '$title', content = '$content', ispublished = '$ispublished', updated_at = '$datetime'
                 WHERE id_article = '$id_article'"
             );
-            return $query;
         } else {
             $query = mysqli_query(
                 $this->connection,
-                "UPDATE tb_article SET imageurl = '$imageurl', content = '$content', ispublished = '$ispublished' WHERE id_article = '$id_article'"
+                "UPDATE tb_article 
+                SET imageurl = '$imageurl', content = '$content', ispublished = '$ispublished', updated_at = '$datetime' 
+                WHERE id_article = '$id_article'"
             );
-            return $query;
         }
+        return $query;
     }
 
-    public function delete_data($id_article) {
+    public function delete_data($id_article)
+    {
+        $data = $this->get_by_id($id_article);
+        if (!empty($data['imageurl'])) {
+            // Delete the associated image file
+            $imagePath = "../files/" . $data['imageurl'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        // Delete the database record
         $query = mysqli_query(
             $this->connection,
-            "DELETE FROM tb_article WHERE id_article = '$id_article'") or 
+            "DELETE FROM tb_article WHERE id_article = '$id_article'"
+        ) or
             die(mysqli_error($this->connection)
-        );
+            );
         return $query;
     }
 
